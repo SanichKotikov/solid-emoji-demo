@@ -1,15 +1,8 @@
 import { createMemo, createSignal, For, onMount, Show } from 'solid-js';
 import { type CompactEmoji } from 'emojibase';
-import { BUTTON_SIZE, EmojiButton } from './emoji-button';
+import { EmojiButton } from './emoji-button';
 import { groups } from './emoji-groups';
-
-const COLUMNS = 9;
-const GAP = 10;
-
-function calcContentSize(count: number): number {
-  const rows = Math.ceil(count / COLUMNS);
-  return (rows * BUTTON_SIZE) + ((rows - 1) * GAP);
-}
+import css from './emoji-list.module.css';
 
 interface IProps {
   onClick: (emoji: CompactEmoji) => void;
@@ -25,14 +18,7 @@ export function EmojiList(props: IProps) {
   });
 
   return (
-    <div
-      role="menu"
-      style={{
-        'width': '400px',
-        'height': '600px',
-        'overflow-y': 'auto',
-      }}
-    >
+    <div role="menu" class={css.root}>
       <Show when={list()}>
         {(list) => (
           <For each={groups}>
@@ -44,19 +30,7 @@ export function EmojiList(props: IProps) {
               });
 
               return (
-                <div
-                  id={group.key}
-                  style={{
-                    'display': 'grid',
-                    'padding': '20px 0',
-                    'grid-template-columns': `repeat(${COLUMNS}, 1fr)`,
-                    'justify-items': 'center',
-                    'gap': `${GAP}px`,
-                    // NOTE: Uncomment next lines to increase performance:
-                    // 'content-visibility': 'auto',
-                    // 'contain-intrinsic-size': `auto ${calcContentSize(items().length)}px`,
-                  }}
-                >
+                <div id={group.key} class={css.group}>
                   <For each={items()}>
                     {(item) => (
                       <EmojiButton

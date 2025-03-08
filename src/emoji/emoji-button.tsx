@@ -1,4 +1,4 @@
-export const BUTTON_SIZE = 26;
+import css from './emoji-button.module.css';
 
 type TProps = {
   label: string;
@@ -14,20 +14,7 @@ export function EmojiButton(props: TProps) {
       aria-label={props.label}
       title={props.label}
       disabled={props.disabled}
-      style={{
-        'appearance': 'none',
-        'display': 'flex',
-        'width': `${BUTTON_SIZE}px`,
-        'height': `${BUTTON_SIZE}px`,
-        'align-items': 'center',
-        'justify-content': 'center',
-        'font-size': `${BUTTON_SIZE}px`,
-        'line-height': 1,
-        'background': 'transparent',
-        'text-rendering': 'optimizeSpeed',
-        'border': 0,
-        'cursor': 'pointer',
-      }}
+      class={css.button}
       onClick={props.onClick}
     >
       {props.unicode}

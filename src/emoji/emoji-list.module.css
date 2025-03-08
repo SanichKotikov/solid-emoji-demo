@@ -1,0 +1,16 @@
+.root {
+  width: 400px;
+  height: 600px;
+  overflow-y: auto;
+}
+
+.group {
+  display: grid;
+  padding: 20px 0;
+  grid-template-columns: repeat(9, 1fr);
+  justify-items: center;
+  gap: 10px;
+
+  content-visibility: auto;
+  contain-intrinsic-size: auto 880px;
+}
