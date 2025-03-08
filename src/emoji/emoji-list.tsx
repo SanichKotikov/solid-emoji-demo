@@ -7,10 +7,10 @@ const PADDING = 20;
 const COLUMNS = 9;
 const GAP = 10;
 
-// function calcHeight(count: number) {
-//   const rows = Math.ceil(count / COLUMNS);
-//   return (rows * BUTTON_SIZE) + ((rows - 1) * GAP) + (PADDING * 2);
-// }
+function calcHeight(count: number) {
+  const rows = Math.ceil(count / COLUMNS);
+  return (rows * BUTTON_SIZE) + ((rows - 1) * GAP) + (PADDING * 2);
+}
 
 interface IProps {
   onClick: (emoji: CompactEmoji) => void;
@@ -53,6 +53,7 @@ export function EmojiList(props: IProps) {
                     'grid-template-columns': `repeat(${COLUMNS}, 1fr)`,
                     'justify-items': 'center',
                     'gap': `${GAP}px`,
+                    // NOTE: Uncomment next lines to increase performance:
                     // 'content-visibility': 'auto',
                     // 'contain-intrinsic-size': `auto ${calcHeight(items().length)}px`,
                   }}
