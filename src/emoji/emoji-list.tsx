@@ -3,13 +3,12 @@ import { type CompactEmoji } from 'emojibase';
 import { BUTTON_SIZE, EmojiButton } from './emoji-button';
 import { groups } from './emoji-groups';
 
-const PADDING = 20;
 const COLUMNS = 9;
 const GAP = 10;
 
-function calcHeight(count: number) {
+function calcContentSize(count: number): number {
   const rows = Math.ceil(count / COLUMNS);
-  return (rows * BUTTON_SIZE) + ((rows - 1) * GAP) + (PADDING * 2);
+  return (rows * BUTTON_SIZE) + ((rows - 1) * GAP);
 }
 
 interface IProps {
@@ -49,13 +48,13 @@ export function EmojiList(props: IProps) {
                   id={group.key}
                   style={{
                     'display': 'grid',
-                    'padding': `${PADDING}px 0`,
+                    'padding': '20px 0',
                     'grid-template-columns': `repeat(${COLUMNS}, 1fr)`,
                     'justify-items': 'center',
                     'gap': `${GAP}px`,
                     // NOTE: Uncomment next lines to increase performance:
                     // 'content-visibility': 'auto',
-                    // 'contain-intrinsic-size': `auto ${calcHeight(items().length)}px`,
+                    // 'contain-intrinsic-size': `auto ${calcContentSize(items().length)}px`,
                   }}
                 >
                   <For each={items()}>
