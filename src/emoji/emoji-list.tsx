@@ -54,7 +54,7 @@ export function EmojiList(props: IProps) {
                     'justify-items': 'center',
                     'gap': `${GAP}px`,
                     // 'content-visibility': 'auto',
-                    // 'contain-intrinsic-size': `400px ${calcHeight(items().length)}px`,
+                    // 'contain-intrinsic-size': `auto ${calcHeight(items().length)}px`,
                   }}
                 >
                   <For each={items()}>
