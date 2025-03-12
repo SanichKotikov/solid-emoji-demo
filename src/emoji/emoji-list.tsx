@@ -4,6 +4,11 @@ import { EmojiButton } from './emoji-button';
 import { groups } from './emoji-groups';
 import css from './emoji-list.module.css';
 
+function calcContentSize(count: number): number {
+  const rows = Math.ceil(count / 9);
+  return (rows * 26) + ((rows - 1) * 10);
+}
+
 interface IProps {
   onClick: (emoji: CompactEmoji) => void;
 }
@@ -30,7 +35,11 @@ export function EmojiList(props: IProps) {
               });
 
               return (
-                <div id={group.key} class={css.group}>
+                <div
+                  id={group.key}
+                  class={css.group}
+                  style={{ 'contain-intrinsic-height': `${calcContentSize(items().length)}px` }}
+                >
                   <For each={items()}>
                     {(item) => (
                       <EmojiButton
