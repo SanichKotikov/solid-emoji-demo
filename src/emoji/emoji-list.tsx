@@ -1,6 +1,5 @@
-import { createMemo, createSignal, For, onMount, Show } from 'solid-js';
+import { createSignal, onMount, Show } from 'solid-js';
 import { type CompactEmoji } from 'emojibase';
-import { EmojiButton } from './emoji-button';
 import { groups } from './emoji-groups';
 import css from './emoji-list.module.css';
 
@@ -21,29 +20,27 @@ export function EmojiList(props: IProps) {
     <div role="menu" class={css.root}>
       <Show when={list()}>
         {(list) => (
-          <For each={groups}>
-            {(group) => {
-              const items = createMemo(() => {
-                return list().filter((item) => {
-                  return item.group === group.order;
-                });
-              });
+          groups.map((group) => {
+            const items = list().filter((item) => {
+              return item.group === group.order;
+            });
 
-              return (
-                <div id={group.key} class={css.group}>
-                  <For each={items()}>
-                    {(item) => (
-                      <EmojiButton
-                        label={item.label}
-                        unicode={item.unicode}
-                        onClick={() => props.onClick(item)}
-                      />
-                    )}
-                  </For>
-                </div>
-              );
-            }}
-          </For>
+            return (
+              <div id={group.key} class={css.group}>
+                {items.map((item) => (
+                  <button
+                    role="menuitem"
+                    aria-label={item.label}
+                    title={item.label}
+                    class={css.button}
+                    onClick={() => props.onClick(item)}
+                  >
+                    {item.unicode}
+                  </button>
+                ))}
+              </div>
+            );
+          })
         )}
       </Show>
     </div>
