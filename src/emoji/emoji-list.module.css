@@ -12,7 +12,6 @@
   gap: 10px;
 
   content-visibility: auto;
-  contain-intrinsic-size: auto 880px;
 }
 
 .button {
